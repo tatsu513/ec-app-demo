@@ -2,13 +2,14 @@ const initialState = {
   users: {
     cart: [],
     customer_id: '',
-    payment_method_id: '',
     email: '',
-    role: '',
     isSignedIn: false,
+    like: [],
+    orders: [],
+    payment_method_id: '',
+    role: '',
     uid: '',
     username: '',
-    orders: []
   },
 
   products: {

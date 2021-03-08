@@ -43,6 +43,14 @@ export const fetchProductInCartAction = (products) => {
   }
 }
 
+export const FETCH_PRODUCTS_IN_LIKE = 'FETCH_PRODUCTS_IN_LIKE'
+export const fetchProductInLikeAction = (products) => {
+  return {
+    type: 'FETCH_PRODUCTS_IN_LIKE',
+    payload: products
+  }
+}
+
 export const FETCH_ORDERS_HISTORY = 'FETCH_ORDERS_HISTORY'
 export const fetchOrdersHistoruAction = (history) => {
   return {

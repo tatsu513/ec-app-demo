@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { db, FirebaseTimestamp } from '../firebase/index'
 import { makeStyles } from '@material-ui/core/styles';
 import { ImageSwiper, SizeTable } from '../components/Products/index'
-import { addProductToCart } from '../reducks/users/operations'
+import { addProductToCart, addProductToLike } from '../reducks/users/operations'
 
 const useStyles = makeStyles((theme) => ({
   sliderBox: {
@@ -49,9 +49,9 @@ const ProductDetail = () => {
 
   const [product, setProduct] = useState(null)
 
-  const addProduct = useCallback((selectedSize) => {
+  const addProduct = useCallback((selectedSize, addType) => {
     const timeStamp = FirebaseTimestamp.now()
-    dispatch(addProductToCart({
+    const addItems = {
       added_time: timeStamp,
       description: product.description,
       gender: product.gender,
@@ -61,7 +61,12 @@ const ProductDetail = () => {
       productId: product.id,
       quantity: 1,
       size: selectedSize
-    }))
+    }
+    if (addType === 'cart') {
+      dispatch(addProductToCart(addItems))
+    } else {
+      dispatch(addProductToLike(addItems))
+    }
   }, [dispatch, product])
 
   useEffect(() => {

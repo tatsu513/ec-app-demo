@@ -2,7 +2,8 @@ import {
   signInAction,
   signOutAction,
   fetchProductInCartAction,
-  fetchOrdersHistoruAction
+  fetchOrdersHistoruAction,
+  fetchProductInLikeAction
 } from './actions'
 import { push } from 'connected-react-router'
 import { auth, db, FirebaseTimestamp } from '../../firebase/index'
@@ -13,13 +14,27 @@ export const addProductToCart = (addedPropduct) => {
     const cartRef = db.collection('users').doc(uid).collection('cart').doc()
     addedPropduct['cartId'] = cartRef.id
     await cartRef.set(addedPropduct)
-    dispatch(push('/'))
   }
 }
 
 export const fetchProductInCart = (products) => {
   return async (dispatch) => {
     dispatch(fetchProductInCartAction(products))
+  }
+}
+
+export const addProductToLike = (addedPropduct) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid
+    const likeRef = db.collection('users').doc(uid).collection('like').doc()
+    addedPropduct['likeId'] = likeRef.id
+    await likeRef.set(addedPropduct)
+  }
+}
+
+export const fetchProductInLike = (products) => {
+  return async (dispatch) => {
+    dispatch(fetchProductInLikeAction(products))
   }
 }
 

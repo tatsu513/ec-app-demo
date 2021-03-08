@@ -22,6 +22,11 @@ export const UsersReducers = (state = initialState.users, action) => {
           ...state,
           cart: [...action.payload]
         }
+      case Action.FETCH_PRODUCTS_IN_LIKE:
+        return {
+          ...state,
+          like: [...action.payload]
+        }
       case Action.FETCH_ORDERS_HISTORY:
         return {
           ...state,
